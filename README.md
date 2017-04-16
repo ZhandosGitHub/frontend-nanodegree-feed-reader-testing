@@ -4,7 +4,7 @@ This is "Feed Reader Testing" Project, as part of Udacity's "Front End Developer
 
 # Running
 
-* To see locally - clone the [Project](https://github.com/ZhandosGitHub/frontend-nanodegree-resume) from GitHub and run Index.html file
+* To see locally - clone the [Project](https://github.com/ZhandosGitHub/frontend-nanodegree-feed-reader-testing) from GitHub and run Index.html file
 
 # Authors
 
