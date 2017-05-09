@@ -27,7 +27,7 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
@@ -41,7 +41,7 @@ $(function() {
          });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
@@ -56,24 +56,26 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Write a new test suite named "The menu" */
     describe('The menu', function() {
-        /* TODO: Write a test that ensures the menu element is
+        /* Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
          it('Menu is hidden', function() {
             //console.log(document.body.className);
-            expect(document.body.className).toBe('menu-hidden');
+            //expect(document.body.className).toBe('menu-hidden');
+            expect(document.body.classList.contains('menu-hidden')).toBe(true);
 
+            //console.log(document.body.classList);
             //console.log(document.body.classList[0]);
             //console.log(document.body.classList.contains('menu-hidden'));
             //console.log(document.body.classList.contains('menus'));
             //expect(document.body.classList.contains('menu-hidden')).toBe(true);
          });
 
-         /* TODO: Write a test that ensures the menu changes
+         /* Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
@@ -86,60 +88,67 @@ $(function() {
           });
     });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
         /* 
          * BeforeEach call to ensure loadFeed loading is complete 
          */
         beforeEach(function(done){
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
-        /* TODO: Write a test that ensures when the loadFeed
+        /* Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        it('There is at least a single .entry element within the .feed contained', function(done) {
-            expect($('.feed').length).not.toBe([0]);
-            done();
+        it('There is at least a single .entry element within the .feed contained', function() {
+            expect($('.feed').length).not.toBe(0);
+            //console.log($('.feed').length);
         });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    /* Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
          //holds currentTitle from the beginning
-         var curTitle = $('.header-title').html();
+         var curTitle;
+         var afterTitle;
 
          /* 
-          * BeforeEach call to ensure loadFeed loads 2nd feed 
+          * BeforeEach call to ensure loaFeed loads 2nd feed 
           */
          beforeEach(function(done) {
             loadFeed(2, function() {
+                //console.log('-----in BeforeEach--------');
+                curTitle = $('.feed').find('h2').first().text();
+                //console.log('START');
+                //console.log('Current');
+                //console.log(curTitle);
+                //console.log('After');
+                //console.log(afterTitle);
+                //console.log('END');
                 done();
             });
          });
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* Write a test that ensures when a new feed, first one, is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         it('Content actually changes', function() {
-            var changedTitle = $('.header-title').html();
-            expect(changedTitle).not.toBe(curTitle);
-         });
-
-          /* 
-          * AfterEach returns to initial, 0 feed, as it was before
-          * calling beforeEach
-          */
-         afterEach(function(done) {
-            loadFeed(0, function() {
+         it('Content actually changes', function(done) {
+            loadFeed(1, function() {
+                //console.log('-----in 2nd loadfeed call---------------');
+                afterTitle = $('.feed').find('h2').first().text();
+                //console.log('START');
+                //console.log('Current');
+                //console.log(curTitle);
+                //console.log('After');
+                // console.log(afterTitle);
+                // console.log('END');
+                expect(curTitle).not.toEqual(afterTitle);
                 done();
-            })
+            });
          });
     });
 }());
