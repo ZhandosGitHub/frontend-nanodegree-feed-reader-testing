@@ -22,7 +22,7 @@ $(function() {
          * page?
          */
         it('are defined', function() {
-            expect(allFeeds).toBeDefined(); 
+            expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
 
@@ -78,8 +78,8 @@ $(function() {
 
     /* Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-        /* 
-         * BeforeEach call to ensure loadFeed loading is complete 
+        /*
+         * BeforeEach call to ensure loadFeed loading is complete
          */
         beforeEach(function(done){
             loadFeed(0, done);
@@ -92,7 +92,7 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         it('There is at least a single .entry element within the .feed contained', function() {
-            //Testing child elements(length) under feed to be greater than 0, meaning at least 1
+            //Testing child elements(length) under ".feed" to be greater than 0, meaning at least 1
             expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
@@ -103,8 +103,8 @@ $(function() {
          var curTitle;
          var afterTitle;
 
-         /* 
-          * BeforeEach call to ensure loaFeed loads 2nd feed 
+         /*
+          * BeforeEach call to ensure loaFeed loads 2nd feed
           */
          beforeEach(function(done) {
             loadFeed(2, function() {
