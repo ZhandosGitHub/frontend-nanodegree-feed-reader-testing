@@ -33,8 +33,6 @@ $(function() {
          */
          it('URL defined', function() {
             allFeeds.forEach(function(feed) {
-                //console.log(feed.url);
-                //console.log(feed.url.length);
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).not.toBe(0);
             });
@@ -47,8 +45,6 @@ $(function() {
          */
          it('Name defined', function() {
             allFeeds.forEach(function(feed) {
-                //console.log(feed.name);
-                //console.log(feed.name.length);
                 expect(feed.name).toBeDefined();
                 expect(feed.name.length).not.toBe(0);
             });
@@ -64,15 +60,7 @@ $(function() {
          * hiding/showing of the menu element.
          */
          it('Menu is hidden', function() {
-            //console.log(document.body.className);
-            //expect(document.body.className).toBe('menu-hidden');
             expect(document.body.classList.contains('menu-hidden')).toBe(true);
-
-            //console.log(document.body.classList);
-            //console.log(document.body.classList[0]);
-            //console.log(document.body.classList.contains('menu-hidden'));
-            //console.log(document.body.classList.contains('menus'));
-            //expect(document.body.classList.contains('menu-hidden')).toBe(true);
          });
 
          /* Write a test that ensures the menu changes
@@ -82,9 +70,9 @@ $(function() {
           */
           it('Menu changes visibility', function() {
             $('a.menu-icon-link').trigger('click');
-            expect(document.body.className).not.toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
             $('a.menu-icon-link').trigger('click');
-            expect(document.body.className).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
           });
     });
 
@@ -104,8 +92,8 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         it('There is at least a single .entry element within the .feed contained', function() {
-            expect($('.feed').length).not.toBe(0);
-            //console.log($('.feed').length);
+            //Testing child elements(length) under feed to be greater than 0, meaning at least 1
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
 
@@ -120,14 +108,7 @@ $(function() {
           */
          beforeEach(function(done) {
             loadFeed(2, function() {
-                //console.log('-----in BeforeEach--------');
                 curTitle = $('.feed').find('h2').first().text();
-                //console.log('START');
-                //console.log('Current');
-                //console.log(curTitle);
-                //console.log('After');
-                //console.log(afterTitle);
-                //console.log('END');
                 done();
             });
          });
@@ -138,14 +119,7 @@ $(function() {
          */
          it('Content actually changes', function(done) {
             loadFeed(1, function() {
-                //console.log('-----in 2nd loadfeed call---------------');
                 afterTitle = $('.feed').find('h2').first().text();
-                //console.log('START');
-                //console.log('Current');
-                //console.log(curTitle);
-                //console.log('After');
-                // console.log(afterTitle);
-                // console.log('END');
                 expect(curTitle).not.toEqual(afterTitle);
                 done();
             });
